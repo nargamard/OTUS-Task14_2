@@ -1,0 +1,11 @@
+FROM alpine
+LABEL maintainer="Sarajkin Andrej a.sarajkin@trs58.ru"
+
+ENV TZ=Europe/Moscow
+
+RUN apk update && apk upgrade && apk add nginx
+COPY ./html/html /var/www/html/default/
+COPY ./html/default.conf  /etc/nginx/http.d/default.conf 
+
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
